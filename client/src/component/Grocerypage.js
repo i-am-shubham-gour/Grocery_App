@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container_page from "./Container_page";
 import axios from "axios";
 
-const Grocerypage = (my_update) => {
+const Grocerypage = () => {
   
   const [title, setTitle] = useState("")
   const [api_data, setApi_data] = useState([]);
@@ -10,6 +10,7 @@ const Grocerypage = (my_update) => {
 
 
   const get_data = async () => {
+    
       const getData = {groceryItem: title, ispurchased: false};
       await axios.post("http://localhost:4321/Grocery/add" , JSON.stringify(getData), {
           headers: {
@@ -35,13 +36,12 @@ const Grocerypage = (my_update) => {
     setmymonth(month_Name[myMonth]);
   }
  
-
-
-
   useEffect(() => {
     fetch_data();
     myMonth();
   }, []);
+
+
 
   return (
     <form>

@@ -42,7 +42,7 @@ const update_data = async (e) => {
                 className="btn btn-dark position-absolute  " 
                 style={{marginLeft: "350px", marginTop: "-54px", }}
                 onClick={update_data}
-              >
+            >
                 Purchased
               </button>
               

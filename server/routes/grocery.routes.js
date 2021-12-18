@@ -3,7 +3,6 @@ const groceryModel = require('../model/grocery')
 
 
 
-
 router.post('/add', async (req, res) => {
     try {
         const {groceryItem, ispurchased} = req.body;
