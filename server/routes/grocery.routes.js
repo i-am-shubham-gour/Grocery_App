@@ -9,7 +9,7 @@ router.post('/add', async (req, res) => {
         const {groceryItem, ispurchased} = req.body;
     const newGrocery = new groceryModel({groceryItem, ispurchased});
     await newGrocery.save();
-    res.json({msg: "grocery added successfully"});
+    res.json({result: "grocery added successfully"});
 
     } catch (error) {
         console.log(error.message);
@@ -28,13 +28,13 @@ router.get("/getAll" , async (req, res) => {
 router.put("/updateGroceryItem/:id" , async (req, res) => {
  const _id =  req.params.id
     await groceryModel.updateOne({_id}, {ispurchased: true})
-    res.json({msg: "Update successfully"})
+    res.json({result: "Update successfully"})
 })
 
 router.delete("/deleteGroceryItem/:id" , async (req, res) => {
     const _myid =  req.params.id
     await groceryModel.deleteOne({_myid})
-    res.json({msg: "Delete successfully"})
+    res.json({result: "Delete successfully"})
 })
 
 module.exports = router;

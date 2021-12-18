@@ -1,17 +1,21 @@
 import axios from "axios";
-import React, {useEffect, useState}  from "react";
+import React, { useState}  from "react";
 
-const Container_page = ({ groceryItem, id, }) => {
+const Container_page = ({ groceryItem, id }) => {
+  const[cut_line, setCut_line] = useState(true)
   
 
-const delete_Data = async (id) => {
+const delete_Data = async (e) => {
+  e.preventDefault();
   await axios.delete(`http://localhost:4321/Grocery/deleteGroceryItem/${id}`)
  
 }
 
-const update_data = async (id) => {
-  
+const update_data = async (e) => {
+  e.preventDefault();
+  setCut_line(false)
   await axios.put(`http://localhost:4321/Grocery/updateGroceryItem/${id}`)
+
 }
 
 
@@ -23,24 +27,21 @@ const update_data = async (id) => {
           style={{ width: "500px" }}
         >
           <div>
-            <h4 className="p-3 ">
-              
-              {groceryItem}
-             
-             
-              
-              
-            </h4>
-            <i onClick={()=> delete_Data(id)} 
+            <div className="p-2 mb-2" >
+            <h4 className={!cut_line  ? " text-decoration-line-through" : "text-decoration-none "  } >
+          {groceryItem}
+          </h4>
+            </div>
+          
+            <i onClick={delete_Data} 
             className="fas fa-trash  position-absolute cursor-pointer  " 
-              style={{marginLeft: "470px", marginTop: "-48px", fontSize: "23px", cursor: "pointer"}}
+              style={{marginLeft: "470px", marginTop: "-46px", fontSize: "23px", cursor: "pointer"}}
               ></i>
           
             <button
-                className="btn btn-dark position-absolute  "
-                style={{marginLeft: "350px", marginTop: "-57px"}}
-                onClick={()=> update_data(id)}
-                
+                className="btn btn-dark position-absolute  " 
+                style={{marginLeft: "350px", marginTop: "-54px", }}
+                onClick={update_data}
               >
                 Purchased
               </button>

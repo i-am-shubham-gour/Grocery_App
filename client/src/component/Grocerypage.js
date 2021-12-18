@@ -6,6 +6,7 @@ const Grocerypage = (my_update) => {
   
   const [title, setTitle] = useState("")
   const [api_data, setApi_data] = useState([]);
+  const [my_month, setmymonth] = useState("")
 
 
   const get_data = async () => {
@@ -17,20 +18,29 @@ const Grocerypage = (my_update) => {
       })
   }
 
-  
-
-
   const fetch_data = async () => {
     const response = await axios.get("http://localhost:4321/Grocery/getAll");
     console.log(response.data);
     setApi_data(response.data);
-   
-    
-    
   };
+
+  const myMonth = () => {
+    const myTime = new Date();
+    let month_Name = [
+      'January', 'February', 'March', 'April',
+      'May', 'June', 'July', 'August', 'September',
+      'October', 'November', 'December'
+    ];
+    const myMonth = myTime.getMonth();
+    setmymonth(month_Name[myMonth]);
+  }
+ 
+
+
 
   useEffect(() => {
     fetch_data();
+    myMonth();
   }, []);
 
   return (
@@ -46,7 +56,7 @@ const Grocerypage = (my_update) => {
           >
             Monthly Grocery Planning App
           </h1>
-          <h3 className="mt-5 pt-5"> Plan for the month </h3>
+          <h3 className="mt-5 pt-5"> Plan for the month {my_month} </h3>
           <div className="mb-3 mt-4">
             <input className="form-control fs-5" type="text"  style={{ width: "500px" }} onChange={(e) => setTitle(e.target.value)} 
             />
@@ -55,11 +65,9 @@ const Grocerypage = (my_update) => {
             </button>
           </div>
           {api_data.map((api, index) => (
-          <Container_page key ={index} groceryItem={api.groceryItem} id={api._id} my_update={my_update}  />
+          <Container_page key ={index} groceryItem={api.groceryItem} id={api._id} api={api_data}  />
         ))}
-        {
-            
-        }
+        
         </div>
         
       </div>
