@@ -1,10 +1,11 @@
 const express = require('express');
+const path = require('path')
 const connectDB = require('./config/DBconfig');
 const groceryRoute = require('./routes/grocery.routes');
 const app = express();
-const PORT = process.env.PORT || 4321;
-const cors = require('cors')
-
+const cors = require('cors');
+require('dotenv').config({path:'./config.env'})
+const port = process.env.PORT;
 connectDB();
 
 app.use(express.json())
@@ -17,9 +18,9 @@ app.get('/', (req, res) => {
     res.send({msg: "API Working"})
 })
 
-app.listen(PORT, (error) => {
+app.listen(port, (error) => {
     if(error){
         console.log(error.message);
     }
-    console.log("Server running");
+    console.log(`Server running `);
 })
