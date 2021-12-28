@@ -7,15 +7,14 @@ const Container_page = ({ groceryItem, id }) => {
 
 const delete_Data = async (e) => {
   e.preventDefault();
-  await axios.delete(`http://localhost:4321/Grocery/deleteGroceryItem/${id}`)
+  await axios.delete(process.env.REACT_APP_DELETE_API)
  
 }
 
 const update_data = async (e) => {
   e.preventDefault();
   setCut_line(false)
-  await axios.put(`http://localhost:4321/Grocery/updateGroceryItem/${id}`)
-
+  await axios.put(process.env.REACT_APP_UPDATE_API)
 }
 
 

@@ -12,7 +12,7 @@ const Grocerypage = () => {
   const get_data = async () => {
     
       const getData = {groceryItem: title, ispurchased: false};
-      await axios.post("http://localhost:4321/Grocery/add" , JSON.stringify(getData), {
+      await axios.post(process.env.REACT_APP_POST_API , JSON.stringify(getData), {
           headers: {
               'Content-Type': 'application/json'
           }
@@ -20,7 +20,7 @@ const Grocerypage = () => {
   }
 
   const fetch_data = async () => {
-    const response = await axios.get("http://localhost:4321/Grocery/getAll");
+    const response = await axios.get(process.env.REACT_APP_GET_API);
     console.log(response.data);
     setApi_data(response.data);
   };
